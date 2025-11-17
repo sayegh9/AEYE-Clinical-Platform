@@ -15,6 +15,7 @@ const sections = [
       { id: 'history', label: 'History Extraction', icon: FileText },
       { id: 'imaging', label: 'Tomography Analysis', icon: BarChart3 },
       { id: 'report', label: 'Final Report', icon: FileText },
+      { id: 'workflow', label: 'Agentic Workflow', icon: BarChart3 },
       { id: 'followup', label: 'Follow-Up Assistant', icon: MessageSquare },
     ]
   },
