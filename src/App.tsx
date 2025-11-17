@@ -7,6 +7,7 @@ import { PatientHistoryScreen } from './screens/PatientHistoryScreen';
 import { ImagingAnalysisScreen } from './screens/ImagingAnalysisScreen';
 import { FinalReportScreen } from './screens/FinalReportScreen';
 import { FollowUpChatScreen } from './screens/FollowUpChatScreen';
+import { WorkflowOrchestrationScreen } from './screens/WorkflowOrchestrationScreen';
 import { EpithelialThicknessModule } from './modules/diagnostics/EpithelialThicknessModule';
 import { ProgressionTrackerModule } from './modules/diagnostics/ProgressionTrackerModule';
 import { BiomechanicalModule } from './modules/diagnostics/BiomechanicalModule';
@@ -24,7 +25,7 @@ import { EMRExportModule } from './modules/utility/EMRExportModule';
 import { PatientEducationModule } from './modules/utility/PatientEducationModule';
 import { BatchProcessingModule } from './modules/utility/BatchProcessingModule';
 
-type Module = 'dashboard' | 'new-assessment' | 'upload' | 'history' | 'imaging' | 'report' | 'followup'
+type Module = 'dashboard' | 'new-assessment' | 'upload' | 'history' | 'imaging' | 'report' | 'followup' | 'workflow'
   | 'etm' | 'progression' | 'biomechanical' | 'post-surgical' | 'qc' | 'safety' | 'heatmap' | 'cross-device'
   | 'surgical-plan' | 'cxl-plan' | 'counseling' | 'followup-plan' | 'analytics'
   | 'emr-export' | 'patient-edu' | 'batch';
@@ -47,6 +48,8 @@ function App() {
         return <FinalReportScreen onStartFollowUp={() => setActiveModule('followup')} />;
       case 'followup':
         return <FollowUpChatScreen />;
+      case 'workflow':
+        return <WorkflowOrchestrationScreen />;
       case 'etm':
         return <EpithelialThicknessModule />;
       case 'progression':
