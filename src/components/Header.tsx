@@ -1,14 +1,17 @@
-import { Bell, User, Settings, Sun, Moon, Menu } from 'lucide-react';
+import { Bell, User, Settings, Sun, Moon, Menu, Bot } from 'lucide-react';
 import { useState } from 'react';
+import { FollowUpAssistant } from './FollowUpAssistant';
 
 interface HeaderProps {
   onSettingsClick?: () => void;
   isSidebarOpen: boolean;
   onToggleSidebar: () => void;
+  activeModule: string;
 }
 
-export function Header({ onSettingsClick, isSidebarOpen, onToggleSidebar }: HeaderProps) {
+export function Header({ onSettingsClick, isSidebarOpen, onToggleSidebar, activeModule }: HeaderProps) {
   const [isDark, setIsDark] = useState(false);
+  const [isAssistantOpen, setIsAssistantOpen] = useState(false);
 
   return (
     <header
@@ -29,6 +32,19 @@ export function Header({ onSettingsClick, isSidebarOpen, onToggleSidebar }: Head
       </div>
 
       <div className="flex items-center gap-4">
+        <button
+          onClick={() => setIsAssistantOpen(!isAssistantOpen)}
+          className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${isAssistantOpen
+              ? 'bg-[#0A74B8] text-white'
+              : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+            }`}
+        >
+          <Bot className="w-5 h-5" />
+          <span className="text-sm font-medium hidden md:block">Follow-Up Assistant</span>
+        </button>
+
+        <div className="h-6 w-px bg-gray-200 mx-2"></div>
+
         <button className="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
           <Bell className="w-5 h-5" />
           <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
@@ -52,6 +68,13 @@ export function Header({ onSettingsClick, isSidebarOpen, onToggleSidebar }: Head
           <Settings className="w-5 h-5" />
         </button>
       </div>
+
+      {isAssistantOpen && (
+        <FollowUpAssistant
+          activeModule={activeModule}
+          onClose={() => setIsAssistantOpen(false)}
+        />
+      )}
     </header>
   );
 }
