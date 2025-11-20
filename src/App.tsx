@@ -25,10 +25,7 @@ import { EMRExportModule } from './modules/utility/EMRExportModule';
 import { PatientEducationModule } from './modules/utility/PatientEducationModule';
 import { BatchProcessingModule } from './modules/utility/BatchProcessingModule';
 
-type Module = 'dashboard' | 'new-assessment' | 'upload' | 'history' | 'imaging' | 'report' | 'followup' | 'workflow'
-  | 'etm' | 'progression' | 'biomechanical' | 'post-surgical' | 'qc' | 'safety' | 'heatmap' | 'cross-device'
-  | 'surgical-plan' | 'cxl-plan' | 'counseling' | 'followup-plan' | 'analytics'
-  | 'emr-export' | 'patient-edu' | 'batch';
+import { Module } from './types';
 
 function App() {
   const [activeModule, setActiveModule] = useState<Module>('dashboard');
@@ -90,19 +87,19 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header 
-        isSidebarOpen={isSidebarOpen} 
-        onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} 
+      <Header
+        isSidebarOpen={isSidebarOpen}
+        onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+        activeModule={activeModule}
       />
-      <Sidebar 
-        activeModule={activeModule} 
-        onModuleSelect={setActiveModule} 
+      <Sidebar
+        activeModule={activeModule}
+        onModuleSelect={setActiveModule}
         isOpen={isSidebarOpen}
       />
-      <main 
-        className={`transition-all duration-300 pt-16 ${
-          isSidebarOpen ? 'ml-64' : 'ml-0'
-        }`}
+      <main
+        className={`transition-all duration-300 pt-16 ${isSidebarOpen ? 'ml-64' : 'ml-0'
+          }`}
       >
         {renderModule()}
       </main>
