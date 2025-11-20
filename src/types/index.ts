@@ -45,3 +45,8 @@ export interface Assessment {
   date: string;
   status: 'in-progress' | 'completed';
 }
+
+export type Module = 'dashboard' | 'new-assessment' | 'upload' | 'history' | 'imaging' | 'report' | 'followup' | 'workflow'
+  | 'etm' | 'progression' | 'biomechanical' | 'post-surgical' | 'qc' | 'safety' | 'heatmap' | 'cross-device'
+  | 'surgical-plan' | 'cxl-plan' | 'counseling' | 'followup-plan' | 'analytics'
+  | 'emr-export' | 'patient-edu' | 'batch';
