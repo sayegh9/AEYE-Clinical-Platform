@@ -3,6 +3,7 @@ import { Home, Upload, FileText, BarChart3, ClipboardList, MessageSquare, Zap, T
 interface SidebarProps {
   activeModule: string;
   onModuleSelect: (module: string) => void;
+  isOpen: boolean;
 }
 
 const sections = [
@@ -52,9 +53,12 @@ const sections = [
   }
 ];
 
-export function Sidebar({ activeModule, onModuleSelect }: SidebarProps) {
+export function Sidebar({ activeModule, onModuleSelect, isOpen }: SidebarProps) {
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-64 bg-white border-r border-gray-200 z-50 overflow-y-auto pt-4">
+    <aside
+      className={`fixed left-0 top-0 bottom-0 w-64 bg-white border-r border-gray-200 z-50 overflow-y-auto pt-4 transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+    >
       <div className="px-4 mb-8">
         <div className="flex items-center gap-2 mb-1">
           <img src="/logo.png" alt="AEYE" className="h-8 w-8" />
@@ -78,11 +82,10 @@ export function Sidebar({ activeModule, onModuleSelect }: SidebarProps) {
                 <button
                   key={item.id}
                   onClick={() => onModuleSelect(item.id)}
-                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                    isActive
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${isActive
                       ? 'bg-blue-100 text-[#0A74B8]'
                       : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
-                  }`}
+                    }`}
                 >
                   <Icon className="w-4 h-4" />
                   <span>{item.label}</span>

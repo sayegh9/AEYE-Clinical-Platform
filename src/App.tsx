@@ -32,6 +32,7 @@ type Module = 'dashboard' | 'new-assessment' | 'upload' | 'history' | 'imaging' 
 
 function App() {
   const [activeModule, setActiveModule] = useState<Module>('dashboard');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const renderModule = () => {
     switch (activeModule) {
@@ -89,9 +90,22 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-      <Sidebar activeModule={activeModule} onModuleSelect={setActiveModule} />
-      {renderModule()}
+      <Header 
+        isSidebarOpen={isSidebarOpen} 
+        onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} 
+      />
+      <Sidebar 
+        activeModule={activeModule} 
+        onModuleSelect={setActiveModule} 
+        isOpen={isSidebarOpen}
+      />
+      <main 
+        className={`transition-all duration-300 pt-16 ${
+          isSidebarOpen ? 'ml-64' : 'ml-0'
+        }`}
+      >
+        {renderModule()}
+      </main>
     </div>
   );
 }
