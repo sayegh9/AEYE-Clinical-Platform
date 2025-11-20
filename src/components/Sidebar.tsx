@@ -1,12 +1,23 @@
 import { Home, Upload, FileText, BarChart3, ClipboardList, MessageSquare, Zap, TrendingUp, Cpu, Wrench, AlertCircle, Grid3x3, Cast, Scissors, BarChart2, FileJson, HelpCircle, Copy, Settings as SettingsIcon } from 'lucide-react';
 
+import { Module } from '../types';
+
 interface SidebarProps {
-  activeModule: string;
-  onModuleSelect: (module: string) => void;
+  activeModule: Module;
+  onModuleSelect: (module: Module) => void;
   isOpen: boolean;
 }
 
-const sections = [
+interface Section {
+  title: string;
+  items: {
+    id: Module;
+    label: string;
+    icon: React.ElementType;
+  }[];
+}
+
+const sections: Section[] = [
   {
     title: 'Core Workflow',
     items: [
@@ -83,8 +94,8 @@ export function Sidebar({ activeModule, onModuleSelect, isOpen }: SidebarProps) 
                   key={item.id}
                   onClick={() => onModuleSelect(item.id)}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${isActive
-                      ? 'bg-blue-100 text-[#0A74B8]'
-                      : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                    ? 'bg-blue-100 text-[#0A74B8]'
+                    : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
                     }`}
                 >
                   <Icon className="w-4 h-4" />
